@@ -36,7 +36,7 @@ const Header = () => {
             type='submit'
             className='border-l border-black py-4 px-4 sm:px-8 active:bg-gray-600 active:text-white'
           >
-            Subscribe addd
+            Subscribe
           </button>
         </form>
       </div>
