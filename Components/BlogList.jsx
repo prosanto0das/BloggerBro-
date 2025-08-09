@@ -19,6 +19,7 @@ const BlogList = () => {
                 return (
                     <BlogItem 
                         key={index}
+                        id={item.id}
                         title={item.title}
                         description={item.description}
                         category={item.category}
