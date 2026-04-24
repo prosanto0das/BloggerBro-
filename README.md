@@ -1,129 +1,88 @@
 # BloggerBro
 
-BloggerBro is a full-stack blog platform built with Next.js (App Router) and MongoDB. It provides a public blog feed with category filtering, individual blog detail pages, and an admin area for creating and managing posts.
+BloggerBro is a modern blog platform built with Next.js 15 (App Router) and React 19. It provides a clean, responsive interface for viewing and browsing blog posts with a beautiful blog feed and detailed blog pages.
 
 ## Features
 
-- Public blog feed with category filters (All, Technology, Startup, Lifestyle)
-- Blog detail pages with author info and hero image
-- Admin area UI with sidebar, top bar, and notifications
-- Create blog posts with image upload stored in `/public`
-- Blog management view with refresh and listing
-- REST API endpoints for blog creation and retrieval
+- Responsive blog feed displaying all blog posts
+- Individual blog detail pages with full post content
+- Blog post list component with blog items
+- Clean and modern UI with Tailwind CSS
+- Static blog data with easy extensibility
 
 ## Tech Stack
 
 - Framework: Next.js 15 (App Router)
 - UI: React 19, Tailwind CSS v4
-- Database: MongoDB with Mongoose
-- HTTP: Axios
-- Notifications: React Toastify
+- Styling: PostCSS
+- Language: JavaScript/JSX
 
-## Project Structure (High Level)
+## Project Structure
 
 ```
 app/
-  page.js                    # Public homepage
-  blogs/[id]/page.jsx         # Blog details
-  admin/
-    layout.jsx                # Admin layout with sidebar + toast
-    addProduct/page.jsx       # Create blog post
-    blogList/page.jsx         # Manage/list blogs
-    subscriptions/page.jsx    # Placeholder
-  api/
-    blog/route.js             # GET list + POST create
-    blog/[id]/route.js        # GET by id
-lib/
-  config/db.js                # MongoDB connection
-  models/BlogModel.js         # Blog schema
-Components/                   # Reusable UI components
-Assets/                       # Images and icons
+  layout.js              # Root layout
+  page.js                # Homepage with blog list
+  blogs/
+    [id]/
+      page.jsx           # Individual blog detail page
+Components/
+  BlogItem.jsx           # Single blog item component
+  BlogList.jsx           # Blog list container
+  Header.jsx             # Header component
+  Footer.jsx             # Footer component
+Assets/
+  assets.js              # Assets configuration
+public/                  # Static files and images
 ```
 
 ## Routes
 
-### Public
+- `/` - Homepage with blog list
+- `/blogs/[id]` - Individual blog detail page
 
-- / - Blog feed
-- /blogs/[id] - Blog details
+## Getting Started
 
-### Admin
+### Prerequisites
 
-- /admin/addProduct - Add blog post
-- /admin/blogList - List/manage posts
-- /admin/subscriptions - Placeholder page
-- /admin - Placeholder page
+- Node.js 18.0 or higher
+- npm or yarn
 
-### API
+### Installation and Setup
 
-- GET /api/blog - List all blogs
-- GET /api/blog?id=<id> - Get blog by query param
-- GET /api/blog/[id] - Get blog by route param
-- POST /api/blog - Create blog with multipart form data
-
-## Data Model
-
-BlogModel (Mongoose):
-
-- title (String, required)
-- description (String, required)
-- category (String, required)
-- author (String, required)
-- image (String, required, stored as URL path)
-- authorImg (String, required)
-- date (Date, default: now)
-
-## Environment Setup
-
-This project currently connects to MongoDB in `lib/config/db.js`.
-For production or sharing, use an environment variable.
-
-.env.local
-```
-MONGODB_URI=your_mongodb_connection_string
+1. Clone the repository:
+```bash
+git clone https://github.com/prosanto0das/BloggerBro-.git
+cd BloggerBro-
 ```
 
-Then update `lib/config/db.js` to read from `process.env.MONGODB_URI`.
-
-## Install and Run
-
+2. Install dependencies:
 ```bash
 npm install
+```
+
+3. Start the development server:
+```bash
 npm run dev
 ```
 
-Open http://localhost:3000
+4. Open your browser and navigate to `http://localhost:3000`
 
-## API Usage Examples
+## Available Scripts
 
-### Get all blogs
+- `npm run dev` - Start development server (port 3000)
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint checks
 
-```bash
-curl http://localhost:3000/api/blog
-```
+## Project Notes
 
-### Create a blog (multipart)
+- Blog data is currently stored statically. The project can be extended to use a database in the future.
+- Components are located in the `Components/` directory with capital 'C'.
+- Assets are managed through the `Assets/assets.js` file.
+- The application uses Next.js 15's App Router for modern routing.
 
-```bash
-curl -X POST http://localhost:3000/api/blog \
-  -F "title=My Blog Title" \
-  -F "description=My blog content..." \
-  -F "category=Technology" \
-  -F "author=Your Name" \
-  -F "authorImg=/author_img.png" \
-  -F "image=@/path/to/thumbnail.jpg"
-```
+## License
 
-## Notes
-
-- Uploaded images are saved in `/public` with a timestamped filename.
-- The admin "Delete" button is UI-only (API delete not implemented yet).
-- The blog detail page currently renders the description plus placeholder sections.
-
-## Scripts
-
-- npm run dev - Start dev server
-- npm run build - Build for production
-- npm run start - Start production server
-- npm run lint - Run linting
+This project is open source and available for use.
 
